@@ -8,7 +8,7 @@ head(mydata)
 attach(mydata)
 
 Mouslim <- factor(Mouslim)
-levels(Mouslim) <- c("low", "medium", "high")
+
 tapply(Price, Mouslim, mean)
 tapply(Price, Mouslim, sd)
 
