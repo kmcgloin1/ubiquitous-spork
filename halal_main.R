@@ -1,8 +1,10 @@
-# ---- STA 5900: Assignment #1 -----
-
 # imports data
-mydata = read.csv("hw1_halal.csv")
+mydata = read.csv("halal.csv")
 
+# make sure the data looks correct
+head(mydata)
+
+# attach data
 attach(mydata)
 
 Mouslim <- factor(Mouslim)
@@ -11,7 +13,8 @@ tapply(Price, Mouslim, mean)
 tapply(Price, Mouslim, sd)
 
 # scatterplot of the population of Muslims in a certain country versus the production price of Halal
-plot(Mouslim, Price, main="Muslim Population vs. Production Price", xlab="Population of Muslims in Country", ylab="Production Price")
+plot(Mouslim, Price, main="Muslim Population vs. Production Price", 
+     xlab="Population of Muslims in Country", ylab="Production Price")
 
 # create single vectors for different countries
 thailand <- c(1145.1, 1040.2, 1074.3, 119.6, 1588.2, 1671.1, 1396.2, 1227.2, 1200.4, 1036.9, 1051.4, 968.8, 1030, 1118.6, 1417.5, 1323, 1548.9, 1770.1, 1766.6)
@@ -39,12 +42,14 @@ ad.test(thailand)
 ad.test(malaysia)
 ad.test(indonesia)
 
-# Since all of the p-values are greater than our statistical significance level, \alpha = 0.5, we can assume that our data is normally distributed. 
+# Since all of the p-values are greater than our statistical significance level, \alpha = 0.5, we can assume 
+# that our data is normally distributed. 
 
 # perform ANOVA test
 model <- lm(Price ~ Mouslim)
 a1 <- anova(model)
-# Our p-value in our anova one-way test indicates that the country is significant, but we do not know which pairs of Mouslim levels are significantly different from each other.
+# Our p-value in our anova one-way test indicates that the country is significant, but we do not know which pairs of 
+# Mouslim levels are significantly different from each other.
 
 # This will require three tests: Thailand vs. Malaysia, Thailand vs. Indonesia, and Malaysia vs. Indonesia. 
 
@@ -62,6 +67,7 @@ aov1 <- aov(Price ~ Mouslim)
 tukey.test <- TukeyHSD(aov1)
 plot(tukey.test)
 
-# Similar to our pairwise t-tests performed above, Tukey's Honest Significant Difference test indicates that there is a statistically significant difference in the average production price of Halal between Thailand and Indonesia. 
+# Similar to our pairwise t-tests performed above, Tukey's Honest Significant Difference test indicates that 
+# there is a statistically significant difference in the average production price of Halal between Thailand and Indonesia. 
 
 
